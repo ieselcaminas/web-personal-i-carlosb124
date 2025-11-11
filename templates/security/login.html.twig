@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-dark">
+    <div class="card p-4" style="min-width: 300px; max-width: 400px; background-color: #222;">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3 text-white">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="text-decoration-none text-primary">Logout</a>
+            </div>
+        {% endif %}
+
+        <h2 class="text-center mb-4" style="font-family: 'Roboto Slab', serif; color: #fff; text-shadow: 1px 1px 3px #000;">
+            Please sign in
+        </h2>
+
+        <form method="post">
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label text-white">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label text-white">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
+                <label class="form-check-label text-white" for="remember_me">Remember me</label>
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-success btn-lg" type="submit">Sign in</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

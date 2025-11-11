@@ -3,11 +3,12 @@
 {% block title %}Inicio — Proyecto Cinema{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <h1 class="text-center mb-4">🎬 Bienvenido a Proyecto Cinema</h1>
+<div class="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center text-center bg-dark text-white">
+    <h1 class="mb-2">🎬 Bienvenido a</h1>
+    <h1 style="font-family: 'Cinzel', serif; text-shadow: 2px 2px 6px #000; letter-spacing: 2px;">
+        Proyecto Cinema
+    </h1>
 
-    <div class="text-center">
-        <a href="/pelicula" class="btn btn-primary btn-lg">Ver películas</a>
-    </div>
+    <a href="/pelicula" class="btn btn-primary btn-lg mt-4">Ver películas</a>
 </div>
 {% endblock %}

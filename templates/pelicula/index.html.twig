@@ -3,53 +3,70 @@
 {% block title %}Listado de Películas{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
+<!-- Fondo oscuro para toda la página -->
+<div class="bg-dark text-light min-vh-100 py-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>🎬 Películas</h1>
-        <a href="{{ path('app_pelicula_new') }}" class="btn btn-success">➕ Añadir nueva</a>
+    <div class="container-fluid">
+        <!-- Título centrado y botón a la derecha -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-center flex-grow-1" 
+        style="font-family: 'Cinzel', serif; 
+           text-shadow: 2px 2px 6px #000; 
+           letter-spacing: 2px;">
+        Proyecto Cinema
+        </h1>            <a href="{{ path('app_pelicula_new') }}" class="btn btn-success ms-3">➕ Añadir nueva</a>
+        </div>
+
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Año</th>
+                    <th>Duración</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for pelicula in peliculas %}
+                <tr>
+                    <td>{{ pelicula.id }}</td>
+                    <td>{{ pelicula.titulo }}</td>
+                    <td>{{ pelicula.ano }}</td>
+                    <td>{{ pelicula.duracion }} min</td>
+                    <td>
+                      {% if pelicula.imagen %}
+                          <img src="{{ asset('uploads/imagenes/' ~ pelicula.imagen) }}" class="img-thumbnail" style="max-width:100px;">
+                      {% else %}
+                          <span class="text-muted">Sin imagen</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_pelicula_show', {'id': pelicula.id}) }}" class="btn btn-primary btn-sm">Ver</a>
+                        <a href="{{ path('app_pelicula_edit', {'id': pelicula.id}) }}" class="btn btn-warning btn-sm">Editar</a>
+                        {{ include('pelicula/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No hay películas registradas</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+ 
+    <div class="mb-4">
+        {% if app.user %}
+            <span class="text-white me-2">Hola, {{ app.user.userIdentifier }}</span>
+            <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="btn btn-success">Login</a>
+        {% endif %}
     </div>
 
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Año</th>
-                <th>Duración</th>
-                <th>Imagen</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-
-        <tbody>
-        {% for pelicula in peliculas %}
-            <tr>
-                <td>{{ pelicula.id }}</td>
-                <td>{{ pelicula.titulo }}</td>
-                <td>{{ pelicula.ano }}</td>
-                <td>{{ pelicula.duracion }} min</td>
-                <td>
-                  {% if pelicula.imagen %}
-                     <img src="{{ asset('uploads/imagenes/' ~ pelicula.imagen) }}" width="100">
-                    {% else %}
-                        <span class="text-muted">Sin imagen</span>
-                    {% endif %}
-
-                </td>
-                <td>
-                    <a href="{{ path('app_pelicula_show', {'id': pelicula.id}) }}" class="btn btn-primary btn-sm">Ver</a>
-                    <a href="{{ path('app_pelicula_edit', {'id': pelicula.id}) }}" class="btn btn-warning btn-sm">Editar</a>
-                    {{ include('pelicula/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6" class="text-center text-muted">No hay películas registradas</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+</div>
 </div>
 {% endblock %}

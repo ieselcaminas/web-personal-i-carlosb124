@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-dark">
+    <div class="card p-4" style="min-width: 300px; max-width: 400px; background-color: #222;">
+        <h2 class="text-center mb-4" style="font-family: 'Roboto Slab', serif; color: #fff; text-shadow: 1px 1px 3px #000;">
+            Login
+        </h2>
+
+        <form action="{{ path('app_login') }}" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="username" class="form-label text-white">Email:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label text-white">Password:</label>
+                <input type="password" id="password" name="_password" class="form-control" />
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me" value="on">
+                <label class="form-check-label text-white" for="remember_me">Recordarme</label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success btn-lg">Login</button>
+            </div>
+
+            <p class="text-center mt-3 text-white">
+                ¿No tienes cuenta? <a href="{{ path('app_register') }}" class="text-decoration-none text-primary">Regístrate</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

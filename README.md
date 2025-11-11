@@ -1,2 +1,2 @@
-# repositorio
-Template para iniciar un proyecto en blanco
+# Master
+El proyecto esta en la rama master

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Película{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+
+    <h1>✏ Editar Película</h1>
+
+    {{ include('pelicula/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('app_pelicula_index') }}" class="btn btn-secondary mt-3">⬅ Volver</a>
+
+    {{ include('pelicula/_delete_form.html.twig') }}
+
+</div>
+{% endblock %}

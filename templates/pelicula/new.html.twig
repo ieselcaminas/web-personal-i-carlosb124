@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Película{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+
+    <h1>➕ Añadir Película</h1>
+
+    {{ include('pelicula/_form.html.twig') }}
+
+    <a href="{{ path('app_pelicula_index') }}" class="btn btn-secondary mt-3">⬅ Volver</a>
+
+</div>
+{% endblock %}

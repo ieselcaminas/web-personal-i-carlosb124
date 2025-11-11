@@ -1,0 +1,30 @@
+{{ form_start(form) }}
+
+<div class="mb-3">
+    {{ form_row(form.titulo, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="mb-3">
+    {{ form_row(form.descripcion, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="mb-3">
+    {{ form_row(form.ano, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="mb-3">
+    {{ form_row(form.duracion, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+
+{% if pelicula.imagen %}
+        <p>Imagen actual:</p>
+        <img src="{{ asset('uploads/imagenes/' ~ pelicula.imagen) }}" 
+             alt="{{ pelicula.titulo }}" 
+             class="img-thumbnail mb-3" 
+             style="max-width:200px;">
+    {% endif %}
+
+<button class="btn btn-success">{{ button_label|default('Guardar') }}</button>
+
+{{ form_end(form) }}

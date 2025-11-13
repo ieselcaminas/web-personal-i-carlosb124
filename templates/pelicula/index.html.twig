@@ -7,16 +7,31 @@
 <div class="bg-dark text-light min-vh-100 py-5">
 
     <div class="container-fluid">
-        <!-- Título centrado y botón a la derecha -->
+        <!-- Título centrado y botones de usuario y añadir película al mismo nivel -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="text-center flex-grow-1" 
-        style="font-family: 'Cinzel', serif; 
-           text-shadow: 2px 2px 6px #000; 
-           letter-spacing: 2px;">
-        Proyecto Cinema
-        </h1>            <a href="{{ path('app_pelicula_new') }}" class="btn btn-success ms-3">➕ Añadir nueva</a>
+            <div class="d-flex align-items-center gap-3">
+                <h1 class="m-0"
+                    style="font-family: 'Cinzel', serif;
+                           text-shadow: 2px 2px 6px #000;
+                           letter-spacing: 2px;">
+                    🎬 Proyecto Cinema
+                </h1>
+
+                <a href="{{ path('app_pelicula_new') }}" class="btn btn-success">➕ Añadir nueva</a>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                {% if app.user %}
+                    <span class="text-white me-2">👤 {{ app.user.userIdentifier }}</span>
+                    <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-success">Login</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-light">Register</a>
+                {% endif %}
+            </div>
         </div>
 
+        <!-- Tabla de películas -->
         <table class="table table-dark table-striped table-hover">
             <thead>
                 <tr>
@@ -57,16 +72,5 @@
             </tbody>
         </table>
     </div>
- 
-    <div class="mb-4">
-        {% if app.user %}
-            <span class="text-white me-2">Hola, {{ app.user.userIdentifier }}</span>
-            <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
-        {% else %}
-            <a href="{{ path('app_login') }}" class="btn btn-success">Login</a>
-        {% endif %}
-    </div>
-
-</div>
 </div>
 {% endblock %}
